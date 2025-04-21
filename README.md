@@ -29,7 +29,7 @@ Save and Document Results:
 Capture the waveform output and include the results in your report for verification.
 
 ## Verilog Code:
-// swap_three_numbers.v
+// swap_three_numbers.v(blocking)
 
     module swap_three_numbers (
     input wire [7:0] a_in,
@@ -45,11 +45,23 @@ Capture the waveform output and include the results in your report for verificat
         c_out = a_in; // Swap: c = a
     end
     endmodule
+// swap_three_numbers.v(non-blocking)
 
-## Output:
-
+    module swap_three_numbers (
+    input wire [7:0] a_in,
+    input wire [7:0] b_in,
+    input wire [7:0] c_in,
+    output reg [7:0] a_out,
+    output reg [7:0] b_out,
+    output reg [7:0] c_out
+    );
+    always @(*) begin
+        a_out <= b_in; 
+        b_out <= c_in; 
+        c_out <= a_in; 
+    end
+    endmodule    
 ## Testbench for Swapping Three Numbers:
-
 // swap_three_numbers_tb.v
 `timescale 1ns / 1ps
 
@@ -95,6 +107,7 @@ Capture the waveform output and include the results in your report for verificat
     endmodule
 
 ## Output:
+![WhatsApp Image 2025-04-12 at 14 52 36_f8691d7d](https://github.com/user-attachments/assets/c516ca35-855b-452e-ab1a-05fd20548a5e)
 
 ## Verilog Code:(for three variables blocking logic)
 
@@ -102,7 +115,7 @@ Capture the waveform output and include the results in your report for verificat
     reg [3:0]a,b,c,d;
     initial 
     begin 
-    a=4'd5;b=4'd6;c=4'd7;
+    a=4'd6;b=4'd7;c=4'd9;
     end
     
     always@(*)
@@ -112,17 +125,13 @@ Capture the waveform output and include the results in your report for verificat
     c=a;
     end
     endmodule
-
-## Output:
-
-
 ## Verilog Code:(for three variables non-blocking logic)
 
     module swap_numbers;
     reg [3:0]a,b,c;
     initial 
     begin 
-    a=4'd5;b=4'd6;c=4'd7;
+    a=4'd6;b=4'd7;c=4'd9;
     end
     
     always@(*)
@@ -132,8 +141,8 @@ Capture the waveform output and include the results in your report for verificat
     c<=a;
     end
     endmodule
-
 ## Output:  
+![image](https://github.com/user-attachments/assets/c34099b5-a80b-43c0-b1b7-c25383b46854)
 
 ## Verilog Code:(for four variables blocking logic)
 
@@ -152,10 +161,6 @@ Capture the waveform output and include the results in your report for verificat
     d=a;
     end
     endmodule
-
-## Output:
-
-
 ## Verilog Code:(for four variables non-blocking logic)
 
     module swap_numbers;
@@ -173,8 +178,8 @@ Capture the waveform output and include the results in your report for verificat
     d<=a;
     end
     endmodule
-
 ## Output: 
+![WhatsApp Image 2025-04-12 at 14 50 08_1535aa19](https://github.com/user-attachments/assets/2792323f-3ea7-4737-ae77-eff80564b3aa)
 
 ## Conclusion
 In this experiment, a Verilog HDL code for swapping three numbers was designed and successfully simulated. The testbench verified the swapping operation, showing that the values of three input numbers (a, b, and c) were swapped correctly without the use of temporary variables. This experiment demonstrated the effectiveness of Verilog in implementing logical operations and control mechanisms such as swapping values. The simulation results confirm the correct functionality of the design.
